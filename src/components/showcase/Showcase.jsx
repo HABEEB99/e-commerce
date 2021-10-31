@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, ButtonGroup, Container, LeftBox, RightBox, Wrapper } from './showcase.styles'
 import { Button } from '@material-ui/core'
-import Pic from '../../assets/napat-saeng-ZackGNxY2Bw-unsplash.jpg'
+import Pic from "../../assets/banner.jpg"
 
 
 
@@ -10,7 +10,7 @@ const Showcase = () => {
         <>
            <Container>
                <Wrapper>
-                 <img src={Pic} alt="banner" />
+                 <img src={Pic} alt="showcase pic" />
                  <Box>
                      <h2><span>Welcome to</span> HABEEB-STORE</h2>
                      <h5>Get quality items at an affordable prices</h5>

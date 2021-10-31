@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import {getAuth} from "firebase/auth";
+import {getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
-
+import { useState, useEffect } from "react";
 
 
 const firebaseConfig = {
@@ -21,3 +21,24 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 
+export const logIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+    
+export const register = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+    
+export const logOut = () => signOut(auth);
+
+
+export const useAuth = () => {
+    const [currentUser, setCurrentUser] = useState();
+
+    useEffect(() => {
+
+        const unSubcribe = onAuthStateChanged(auth, user => setCurrentUser(user));
+            
+        return unSubcribe;
+        
+       
+    }, [])
+
+    return currentUser;
+};

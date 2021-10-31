@@ -1,4 +1,4 @@
-import react, {useState, useEffect} from "react";
+
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./globalStyles";
 import { Container } from "./app.styles";
@@ -7,7 +7,7 @@ import Home from "./directories/home/Home";
 import Footer from "./components/footer/Footer";
 import { Route, Switch } from "react-router";
 import SignUp from "./directories/signup/SignUp";
-
+import Shop from "./directories/shop/Shop";
 
 
 const theme = {
@@ -20,15 +20,18 @@ const theme = {
   }
 }
 function App() {
+
+
  
   return (
     <ThemeProvider theme={theme}>
       <>
         <Container>
           <GlobalStyles/>
-          <Header/>
+          <Header />
           <Switch>
             <Route exact path="/" component={Home}/>
+            <Route exact path="/shop" component={Shop}/>
             <Route exact path="/signup" component={SignUp}/>
           </Switch>
           <Footer/>
@@ -36,6 +39,8 @@ function App() {
       </>
     </ThemeProvider>
   );
-}
+};
+
+
 
 export default App;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {ImSearch} from 'react-icons/im'
-import {BsFillPersonFill,  BsCart4} from 'react-icons/bs'
+import {BsFillPersonFill} from 'react-icons/bs'
 import {BiHeart,} from 'react-icons/bi'
 import {FaTimes} from 'react-icons/fa'
 import {GoThreeBars} from 'react-icons/go'
@@ -60,27 +60,27 @@ export const NavIcons = styled.div`
 display: flex;
 align-items: center;
 color: gray;
-`;
 
-export const User = styled(BsFillPersonFill)`
-font-size: 2rem;
-cursor: pointer;
-
-&:hover{
+h3{
+    font-size: 1.2rem;
+    color:gray;
+    cursor: pointer;
+    border: 3px solid gray;
+    width: 5rem;
+    text-align: center;
+    padding:  0.1rem;
+    font-weight: bold;
+    &:hover{
     color: #244d4d;
+    border: 3px solid  #244d4d;
+}
+&:active{
+    color: orangered;
+}
 }
 `;
 
 
-export const Cart = styled(BsCart4)`
-font-size: 2rem;
-margin: 0 0.9rem;
-cursor: pointer;
-
-&:hover{
-    color: #244d4d;
-}
-`;
 
 export const Like = styled(BiHeart)`
 font-size: 2rem;
@@ -114,8 +114,36 @@ right: 0rem;
 position: absolute;
 transition: all 0.2s ease-in-out;
 /* opacity: 0.6; */
-display: ${({nav}) => nav ? null : "none"};
+/* display: ${({nav}) => nav ? null : "none"}; */
 `;
+
+export const CartDropdown = styled.div`
+display: flex;
+flex-direction: column;
+z-index: 10;
+background: #244d4d;
+width: 25vw;
+height: 60vh;
+top: 4rem;
+right: 0rem;
+position: absolute;
+transition: all 0.2s ease-in-out;
+/* opacity: 0.6;
+display: ${({nav}) => nav ? null : "none"}; */
+
+button{
+    margin-top: auto;
+    margin: 3rem;
+    height: 2rem;
+}
+`;
+
+export const CartWrapper = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+`;
+
 
 export const CloseBar = styled.div`
 display: flex;
@@ -164,7 +192,7 @@ right: 0rem;
 position: absolute;
 transition: all 0.2s ease-in-out;
 /* opacity: 0.6; */
-display: ${({form}) => form ? null : "none"};
+/* display: ${({form}) => form ? null : "none"}; */
 
 `;
 

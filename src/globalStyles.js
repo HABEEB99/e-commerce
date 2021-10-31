@@ -2,6 +2,9 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
+&:-webkit-scrollbar{
+    background-color: green;
+  }
 
 *{
     margin: 0;

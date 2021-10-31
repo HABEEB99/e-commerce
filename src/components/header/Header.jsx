@@ -1,17 +1,23 @@
 import React, {useState} from 'react'
-import { Brand, ButtonWrapper, Cart, CheckBoxWrapper, Close, CloseBar, Container, Form, 
+import { Brand, ButtonWrapper,  CartDropdown,  CartWrapper,  CheckBoxWrapper, Close, CloseBar, Container, Form, 
    FormWrapper, Input, Like, Link, Nav, NavIcons,
-Navigation, SearchBar, SearchIcon, SideNav, SignIn, User } from './header.styles'
+Navigation, SearchBar, SearchIcon, SideNav, SignIn } from './header.styles'
 import { navItems } from '../footer/footer.db'
 import { NavLink, useHistory } from 'react-router-dom';
-import { signInWithEmailAndPassword } from '@firebase/auth';
-import { auth, db } from '../../firebase/firebase.utils';
+import { db } from '../../firebase/firebase.utils';
 import {updateDoc, doc} from '@firebase/firestore';
+import Cart from '../cart/Cart';
+import {connect} from 'react-redux'
+import toggleNav from '../../redux/nav/nav.actions';
+import toggleForm from '../../redux/form/form.action';
+import { useAuth, logIn, logOut} from '../../firebase/firebase.utils';
 
 
 
 
-const Header = () => {
+const Header = ({hidden, close, toggleNav, isHidden, toggleForm}) => {
+    
+     const currentUser = useAuth();
 
      const history = useHistory();
 
@@ -21,14 +27,14 @@ const Header = () => {
        setData({...data, [e.target.name] : e.target.value})
    };
 
-       const handleSubmit = async (e) => {
+       const handleLogin = async (e) => {
         e.preventDefault();
        setData({...data, error: null, loading: true});
          if (!email || !password) {
           setData({...data, error: "All fields must be filled"});
         }
        try {
-           const result = await signInWithEmailAndPassword(auth, email, password);
+           const result = await logIn( email, password);
            await updateDoc(doc(db, 'users', result.user.uid),{
              isOnline: true,
          });
@@ -38,13 +44,17 @@ const Header = () => {
         } catch (error) {
            setData({...data, error: error.message, loading: false})
         }
-     }
+     };
 
-    const [openNav, setOpenNav] = useState(true);
-    const toggleNav = () => setOpenNav(!openNav); 
-     
-    const [openForm, setOpenForm] = useState(true);
-    const toggleForm = () => setOpenForm(!openForm);
+     const handleLogOut = async () => {
+
+        setData({...data, error: null, loading: true});
+        try {
+           await logOut();
+        } catch (error) {
+         setData({...data, error: error.message, loading: false})
+        }
+     };
 
     return (
         <>
@@ -52,12 +62,14 @@ const Header = () => {
                <Brand>
                   <h3>HABEEB-STORE</h3>
                </Brand>
+
                <SearchBar>
                   <Input/>
                   <SearchIcon/>
                </SearchBar>
+
                <NavIcons>
-                 <User onClick={toggleForm}/>
+                 {currentUser ? (<h3 onClick={handleLogOut}>Logout</h3>) :  (<h3 onClick={toggleForm}>Login</h3>)}
                  <Like/>
                  <Cart/>
                  <Nav onClick={toggleNav}/>
@@ -65,36 +77,67 @@ const Header = () => {
               
            </Container> 
 
-           <Navigation nav={openNav}>
-                <CloseBar onClick={toggleNav}><Close/></CloseBar>
-                <SideNav onClick={toggleNav}>
-                    {navItems.map(item => <Link key={item.id} to={item.path}>{item.name}</Link>)}
-                </SideNav>
-           </Navigation>
+           {close ? null : (
+            <Navigation >
+               <CloseBar onClick={toggleNav}><Close/></CloseBar>
+               <SideNav onClick={toggleNav}>
+                  {navItems.map(item => <Link key={item.id} to={item.path}>{item.name}</Link>)}
+               </SideNav>
+            </Navigation>
+           )}
 
-           <SignIn form={openForm}>
-              <CloseBar onClick={toggleForm}><Close/></CloseBar>
-              <FormWrapper>
-                 <h2>Login Form</h2>
-                 <Form onSubmit={handleSubmit}>
-                   <input type="text" name="email" value={email} onChange={handleChange} placeholder="enter your email" />
-                   <input type="password" name="password" value={password} onChange={handleChange} placeholder="enter your password" />
-                   <CheckBoxWrapper>
+
+           {hidden ? null : (
+            <CartDropdown>
+               <CartWrapper>
+               <button>Go To Checkout</button>
+               </CartWrapper>
+            </CartDropdown>
+           )}
+            
+           {isHidden ? null : (
+              
+           <SignIn>
+            <CloseBar onClick={toggleForm}><Close/></CloseBar>
+            <FormWrapper>
+               <h2>Login Form</h2>
+               <Form onSubmit={handleLogin}>
+                  <input type="text" name="email" value={email} onChange={handleChange} placeholder="enter your email" />
+                  <input type="password" name="password" value={password} onChange={handleChange} placeholder="enter your password" />
+                  <CheckBoxWrapper>
                      <input type="checkbox" id="checkbox" value="Remember Me" />
                      <label for="checkbox">Remember Me</label>
-                   </CheckBoxWrapper>
-                   <p>{error}</p>
-                   <ButtonWrapper>
+                  </CheckBoxWrapper>
+                  <p>{error}</p>
+                  <ButtonWrapper>
                      <button disabled={loading}>{loading ? "Signing in" : "Sign in"}</button>
                      <button>Sign in with Google</button>
-                   </ButtonWrapper>
-                   <h5>Forget Password? <NavLink to="/">Click Here</NavLink></h5>
-                   <h5>Don't Have An Account? <NavLink to="/signup">Create New</NavLink></h5>
-                 </Form>
-              </FormWrapper>
+                  </ButtonWrapper>
+                  <h5>Forget Password? <NavLink to="/">Click Here</NavLink></h5>
+                  <h5>Don't Have An Account? <NavLink to="/signup">Create New</NavLink></h5>
+               </Form>
+            </FormWrapper>
            </SignIn>
+           )}
+
         </>
     )
 }
 
-export default Header
+const mapStateToProps = ({cart: {hidden}, nav:{close}, form:{isHidden}}) => ({
+   hidden,
+   close,
+   isHidden,
+});
+
+
+const mapDispatchToProps = dispatch => ({
+   toggleForm : () => dispatch(toggleForm()),
+   toggleNav : () => dispatch(toggleNav()),
+   
+})
+
+
+
+
+export default  connect(mapStateToProps, mapDispatchToProps)(Header);

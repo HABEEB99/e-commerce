@@ -1,8 +1,8 @@
 import React from 'react'
 import { Box, Box1, Box2, Box3, Container, Detail, Wrapper } from './offer.styles'
-import pic1 from '../../assets/alexander-naglestad-RFhq0SrrgEg-unsplash.jpg'
-import pic2 from '../../assets/revolt-164_6wVEHfI-unsplash.jpg'
-import pic3 from '../../assets/dave-goudreau-st7BB69d6Kg-unsplash.jpg'
+import pic1 from "../../assets/offer-1.jpg"
+import pic2 from "../../assets/offer-2.jpg"
+import pic3 from "../../assets/offer-3.jpg"
 
 
 

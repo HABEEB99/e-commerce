@@ -1,10 +1,9 @@
 import React, {useState} from 'react'
 import { Container, Form, FormWrapper, InputWrapper } from './register.styles'
 import { NavLink, useHistory } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { auth, db } from '../../firebase/firebase.utils';
+import {  db } from '../../firebase/firebase.utils';
 import { setDoc, doc, Timestamp } from '@firebase/firestore';
-
+import { register } from '../../firebase/firebase.utils';
 
 
 const Register = () => {
@@ -12,20 +11,21 @@ const Register = () => {
     const history = useHistory();
     
     const [data, setData] =  useState({name: '', email: '', password: '', error: null, loading: false,});
-    const{name, email, password, error, loading} = data;
+    
     const handleChange = (e) => {
        setData({...data, [e.target.name] : e.target.value})
     };
 
-
-    const handleSubmit = async (e) => {
+    const{name, email, password, error, loading} = data;
+    
+    const handleRegister = async (e) => {
        e.preventDefault();
        setData({...data, error: null, loading: true});
          if (!name || !email || !password) {
            setData({...data, error: "All fields must be filled"});
         }
        try {
-          const result = await createUserWithEmailAndPassword(auth, email, password);
+          const result = await register( email, password);
           await setDoc(doc(db, 'users', result.user.uid),{
              uid: result.user.uid,
              name,
@@ -46,7 +46,7 @@ const Register = () => {
           <Container>
              <FormWrapper>
                <h1>Register A New Account</h1>
-               <Form onSubmit={handleSubmit}>
+               <Form onSubmit={handleRegister}>
                   <InputWrapper>
                     <label htmlFor="name">NAME:</label>
                     <input id="name" type="text" name="name" value={name} onChange={handleChange}/>
