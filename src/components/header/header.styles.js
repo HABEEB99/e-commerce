@@ -53,7 +53,7 @@ color: ${({theme}) => theme.color.primary};
 font-size: 1.5rem;
 position: absolute;
 top: 1.2rem;
-right: 30rem;
+right: 31rem;
 `;
 
 export const NavIcons = styled.div`
@@ -131,17 +131,19 @@ transition: all 0.2s ease-in-out;
 /* opacity: 0.6;
 display: ${({nav}) => nav ? null : "none"}; */
 
-button{
-    margin-top: auto;
-    margin: 3rem;
-    height: 2rem;
-}
+
 `;
 
 export const CartWrapper = styled.div`
 display: flex;
 flex-direction: column;
-justify-content: flex-end;
+
+
+button{
+    margin-top: auto;
+    margin: 3rem;
+    height: 2rem;
+}
 `;
 
 

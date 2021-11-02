@@ -11,6 +11,7 @@ span{
     top: 1.2rem; 
     color: black;
     text-align: center;
+    cursor: pointer;
 }
 `;
 

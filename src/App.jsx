@@ -8,6 +8,7 @@ import Footer from "./components/footer/Footer";
 import { Route, Switch } from "react-router";
 import SignUp from "./directories/signup/SignUp";
 import Shop from "./directories/shop/Shop";
+import Checkout from "./directories/checkout/Checkout";
 
 
 const theme = {
@@ -33,6 +34,7 @@ function App() {
             <Route exact path="/" component={Home}/>
             <Route exact path="/shop" component={Shop}/>
             <Route exact path="/signup" component={SignUp}/>
+            <Route exact path="/checkout" component={Checkout}/>
           </Switch>
           <Footer/>
         </Container>

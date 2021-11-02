@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Brand, ButtonWrapper,  CartDropdown,  CartWrapper,  CheckBoxWrapper, Close, CloseBar, Container, Form, 
+import { Brand, ButtonWrapper, CheckBoxWrapper, Close, CloseBar, Container, Form, 
    FormWrapper, Input, Like, Link, Nav, NavIcons,
 Navigation, SearchBar, SearchIcon, SideNav, SignIn } from './header.styles'
 import { navItems } from '../footer/footer.db'
@@ -7,6 +7,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { db } from '../../firebase/firebase.utils';
 import {updateDoc, doc} from '@firebase/firestore';
 import Cart from '../cart/Cart';
+import CartDropdown from '../../cart-dropdown/CartDropdown';
 import {connect} from 'react-redux'
 import toggleNav from '../../redux/nav/nav.actions';
 import toggleForm from '../../redux/form/form.action';
@@ -64,7 +65,7 @@ const Header = ({hidden, close, toggleNav, isHidden, toggleForm}) => {
                </Brand>
 
                <SearchBar>
-                  <Input/>
+                  <Input placeholder="    search item"/>
                   <SearchIcon/>
                </SearchBar>
 
@@ -88,11 +89,7 @@ const Header = ({hidden, close, toggleNav, isHidden, toggleForm}) => {
 
 
            {hidden ? null : (
-            <CartDropdown>
-               <CartWrapper>
-               <button>Go To Checkout</button>
-               </CartWrapper>
-            </CartDropdown>
+            <CartDropdown/>
            )}
             
            {isHidden ? null : (

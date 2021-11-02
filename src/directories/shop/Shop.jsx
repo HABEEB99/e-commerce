@@ -8,11 +8,12 @@ const Shop = () => {
     return (
         <>
            <Container>
+              <h1>Collection Preview</h1>
               <Wrapper>
                  {shopData.map(({id, title, path, items}) => {
                      return(
                          <Box key={id}>
-                             <h1>{title}</h1>
+                             <h2>{title}</h2>
                              <ItemBox>
                                 <ItemList items={items}/>
                              </ItemBox>
