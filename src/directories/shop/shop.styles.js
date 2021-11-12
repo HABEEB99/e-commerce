@@ -14,14 +14,3 @@ export const Wrapper = styled.div`
 padding: 1rem 4rem;
 
 `;
-
-export const Box = styled.div`
-h2{
-    font-size: 2rem;
-}
-margin-top: 2rem;
-`;
-
-export const ItemBox = styled.div`
-
-`;

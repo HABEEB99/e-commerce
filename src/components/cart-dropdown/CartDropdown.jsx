@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import CartItem from '../components/cart-item/CartItem'
-import { selectCartItems } from '../redux/cart/cart.selectors'
+import CartItem from '../cart-item/CartItem.jsx'
+import { selectCartItems } from '../../redux/cart/cart.selectors'
 import { Container, Box, Button, ButtonWrapper} from './cartDropdown.styles'
 import { withRouter, useHistory } from 'react-router'
 

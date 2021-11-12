@@ -2,12 +2,21 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
-padding: 0rem 2rem;
 display: flex;
 align-items: center;
 justify-content: space-between;
 height: 6rem;
+margin: 10% 5%;
+`;
 
+export const Image = styled.div`
+width: 10rem;
+height: 7rem;
+
+img{
+    width: 100%;
+    height: 100%;
+}
 `;
 
 
@@ -18,7 +27,7 @@ justify-content: center;
 align-items: center;
 
 span{
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: white;
     text-align: center;
 }

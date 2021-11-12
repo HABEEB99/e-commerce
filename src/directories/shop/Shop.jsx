@@ -1,30 +1,27 @@
 import React from 'react'
-import { Container, Wrapper, Box, ItemBox } from './shop.styles'
-import { shopData } from './shop.data'
-import { NavLink } from 'react-router-dom'
-import ItemList from '../../components/item-list/ItemList'
+import { Route } from 'react-router';
+import ShopCollections from '../../components/shop-collections/ShopCollections';
+import CollectionsCategory from '../shop-collections-category/CollectionsCategory';
+import { Container, Wrapper,} from './shop.styles'
 
-const Shop = () => {
+
+
+
+const Shop = ({match}) => {
     return (
         <>
            <Container>
               <h1>Collection Preview</h1>
               <Wrapper>
-                 {shopData.map(({id, title, path, items}) => {
-                     return(
-                         <Box key={id}>
-                             <h2>{title}</h2>
-                             <ItemBox>
-                                <ItemList items={items}/>
-                             </ItemBox>
-                             <NavLink to={path}> View More Items </NavLink>
-                         </Box>
-                     )
-                 })}
+                <Route exact path={`${match.path}`} component={ShopCollections}/>
+                <Route exact path={`${match.path}/:categoryId`} component={CollectionsCategory}/>
               </Wrapper>
            </Container>
         </>
     )
 }
 
-export default Shop
+
+
+
+export default Shop;

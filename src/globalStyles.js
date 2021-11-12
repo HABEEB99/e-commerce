@@ -1,10 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
+overflow-X: none;
 
-&:-webkit-scrollbar{
-    background-color: green;
-  }
+// &::-webkit-scrollbar{
+//     background-color: green;
+//   }
 
 *{
     margin: 0;

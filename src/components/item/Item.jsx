@@ -11,7 +11,7 @@ const Item = ({item, addItem }) => {
            <Container>
                 
              <h3>{name}</h3>
-             <img src={pic} alt={name} />
+             <img src={imageURL} alt={name} />
              <button>view full description</button>     
              <Details>
                  <h5>{price}</h5>

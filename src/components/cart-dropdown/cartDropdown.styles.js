@@ -9,7 +9,7 @@ position: relative;
 z-index: 10;
 background: #244d4d;
 width: 25vw;
-height: 60vh;
+height: 80vh;
 top: 4rem;
 right: 0rem;
 position: absolute;
@@ -21,7 +21,7 @@ h4{
     font-size: 2rem;
     color: white;
     text-align: center;
-    margin-top: 10rem;
+    margin-top: 16rem;
 }
 `;
 
@@ -51,7 +51,7 @@ color: white;
 
 export const ButtonWrapper = styled.button`
 flex: 2;
-margin: 1rem 0;
+margin: 0.5rem 0;
 background: #244d4d;
 border: none;
 `;

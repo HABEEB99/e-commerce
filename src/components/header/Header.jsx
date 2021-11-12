@@ -7,7 +7,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { db } from '../../firebase/firebase.utils';
 import {updateDoc, doc} from '@firebase/firestore';
 import Cart from '../cart/Cart';
-import CartDropdown from '../../cart-dropdown/CartDropdown';
+import CartDropdown from '../../components/cart-dropdown/CartDropdown';
 import {connect} from 'react-redux'
 import toggleNav from '../../redux/nav/nav.actions';
 import toggleForm from '../../redux/form/form.action';
